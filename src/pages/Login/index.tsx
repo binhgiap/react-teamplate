@@ -9,7 +9,6 @@ Login.propTypes = {};
 function Login() {
   const [state, dispatch] = useStore();
   const onFinish = (values: string) => {
-    console('-', dispatch);
     dispatch(actions.setIsAuthenticated({ isAuthenticated: true }));
   };
   return (

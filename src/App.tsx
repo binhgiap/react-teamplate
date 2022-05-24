@@ -13,17 +13,16 @@ import { appRoutes } from './router/routes';
 import { useStore } from './store/hooks';
 
 function App() {
-  const [state, dispatch] = useStore();
+  const [state] = useStore();
   const { isAuthenticated } = state;
-  console.log('==', state);
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<OpenSiteRoutes isAuthenticated={isAuthenticated} />}>
+        <Route path="/" element={<OpenSiteRoutes />}>
           <Route path={`${appRoutes.AUTH.LOGIN}`} element={<Login />} />
           <Route path={`${appRoutes.AUTH.REGISTER}`} element={<Register />} />
         </Route>
-        <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
+        <Route element={<PrivateRoute />}>
           <Route element={<MainLayout />}>
             <Route element={<RoleRoute roles={[ROLE.Admin, ROLE.User]} />}>
               <Route index element={<Home />} />
