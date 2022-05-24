@@ -1,0 +1,13 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-between;
+  height: 1024px;
+  overflow: hidden;
+  &__content {
+    flex-grow: 1;
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+}

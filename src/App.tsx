@@ -1,25 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import './App.scss';
+import MainLayout from './layout/Main';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import NotFound from './pages/NotFound';
+import Register from './pages/Register';
+import OpenSiteRoutes from './router/openSiteRoute';
+import PrivateRoute from './router/privateRoute';
+import { ROLE } from './router/role';
+import RoleRoute from './router/roleRoute';
+import { appRoutes } from './router/routes';
+import { useStore } from './store/hooks';
 
 function App() {
+  const [state, dispatch] = useStore();
+  const { isAuthenticated } = state;
+  console.log('==', state);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<OpenSiteRoutes isAuthenticated={isAuthenticated} />}>
+          <Route path={`${appRoutes.AUTH.LOGIN}`} element={<Login />} />
+          <Route path={`${appRoutes.AUTH.REGISTER}`} element={<Register />} />
+        </Route>
+        <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
+          <Route element={<MainLayout />}>
+            <Route element={<RoleRoute roles={[ROLE.Admin, ROLE.User]} />}>
+              <Route index element={<Home />} />
+              <Route path={`${appRoutes.HOME.ROOT}`} element={<Home />} />
+            </Route>
+          </Route>
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
