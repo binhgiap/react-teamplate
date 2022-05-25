@@ -10,11 +10,8 @@ import PrivateRoute from './router/privateRoute';
 import { ROLE } from './router/role';
 import RoleRoute from './router/roleRoute';
 import { appRoutes } from './router/routes';
-import { useStore } from './store/hooks';
 
 function App() {
-  const [state] = useStore();
-  const { isAuthenticated } = state;
   return (
     <BrowserRouter>
       <Routes>

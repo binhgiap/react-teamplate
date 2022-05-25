@@ -1,8 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { appRoutes } from './routes';
 import { useStore } from '../store';
+import { appRoutes } from './routes';
 
 function PrivateRoute() {
   const [state] = useStore();

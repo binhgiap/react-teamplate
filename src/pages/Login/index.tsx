@@ -7,7 +7,7 @@ import { useStore } from '../../store/hooks';
 Login.propTypes = {};
 
 function Login() {
-  const [state, dispatch] = useStore();
+  const [, dispatch] = useStore();
   const onFinish = (values: string) => {
     dispatch(actions.setIsAuthenticated({ isAuthenticated: true }));
   };
